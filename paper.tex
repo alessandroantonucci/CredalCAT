@@ -1,102 +1,115 @@
 \documentclass[runningheads]{llncs}
-\usepackage{graphicx}
-\usepackage{xcolor} 
-\usepackage{amsmath} 
-\usepackage{amstext} 
-\usepackage{amssymb} 
-\usepackage{amsfonts} 
-\usepackage{mathptmx} 
-\usepackage[scaled=.90]{helvet} 
-\usepackage{courier} 
-\usepackage{textcomp} 
-\usepackage{hyperref} 
-\usepackage{array}
-\usepackage{varwidth}
-\usepackage[american]{babel}
-\usepackage{mathtools} % fixes and extends amsmath
-\mathtoolsset{mathic}
-\allowdisplaybreaks
-\usepackage{mathptmx}
-\usepackage{tabu}
-%\usepackage{breqn}
-\usepackage{algorithm,algorithmic,bm}
+\usepackage[]{algorithm2e}
+\usepackage[]{algorithmic}
+\usepackage{bm,hyperref,booktabs,tikz,pgf,pgfplots,amsmath}
+\usetikzlibrary{arrows,automata,circuits}
+%\pgfplotsset{compat=1.13}
+%\usepackage{pgfkeys}
+%\usepackage{graphicx}
+%xcolor} 
+%amsmath} 
+%amstext} 
+%amssymb} 
+%amsfonts} 
+%\usepackage{mathptmx} 
+%\usepackage[scaled=.90]{helvet} 
+%\usepackage{courier} 
+%\usepackage{textcomp} 
+%\usepackage{array}
+%\usepackage{varwidth}
+%\usepackage[american]{babel}
+%usepackage{mathtools} % fixes and extends amsmath
+%mathtoolsset{mathic}
+%\allowdisplaybreaks
+%\usepackage{mathptmx}
+%\usepackage{tabu}
+%%\usepackage{breqn}
+%\usepackage{algorithm,algorithmic,bm}
 % If you use the hyperref package, please uncomment the following line
 % to display URLs in blue roman font according to Springer's eBook style:
-\renewcommand\UrlFont{\color{blue}\rmfamily}
+%\renewcommand\UrlFont{\color{blue}\rmfamily}
 %% Suggested packages, as needed:
-\usepackage{booktabs} % commands to create good-looking tables
-\usepackage{tikz} % nice language for creating drawings and diagrams - required for 
+%\usepackage{booktabs} % commands to create good-looking tables
+%\usepackage{tikz} % nice language for creating drawings and diagrams - required for 
 %drawing custom shapes
-\usetikzlibrary{%
-	arrows,%
-	calc,%
-	fit,%
-	patterns,%
-	plotmarks,%
-	shapes.geometric,%
-	shapes.misc,%
-	shapes.symbols,%
-	shapes.arrows,%
-	shapes.callouts,%
+%\usetikzlibrary{%
+%	arrows,%
+%	calc,%
+%	fit,%
+%	patterns,%
+%	plotmarks,%
+%	shapes.geometric,%
+%	shapes.arrows,%
+%	shapes.callouts,%
 	% shapes.multipart,%
 	% shapes.gates.logic.US,%
 	% shapes.gates.logic.IEC,%
 	% er,%
 	% automata,%
-	backgrounds,%
-	chains,%
-	topaths,%
-	trees,%
-	petri,%
-	mindmap,%
-	matrix,%
-	% calendar,%
-	folding,%
-	fadings,%
-	through,%
-	positioning,%
-	scopes,%
-	decorations.fractals,%
-	decorations.shapes,%
-	decorations.text,%
-	decorations.pathmorphing,%
-	decorations.pathreplacing,%
-	decorations.footprints,%
-	decorations.markings,%
-	shadows}
-\usetikzlibrary{arrows,automata,circuits}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.13}
-\usepackage{pgfkeys}
+%	topaths,%
+%	trees,%
+%	matrix,%
+%	% calendar,%
+%	folding,%
+%	fadings,%
+%	positioning,%
+%	scopes,%
+%	decorations.fractals,%
+%	decorations.shapes,%
+%	decorations.text,%
+%	decorations.pathmorphing,%
+%	decorations.pathreplacing,%
+%	decorations.footprints,%
+%	decorations.markings,%
+%	shadows}
 %\usepackage{trace-pgfkeys}
 \begin{document}
-\title{Approximating Information-Theoretic Scores\\for Adaptive Tests}
+\title{Approximating Information-Theoretic Scores\\for Computer Adaptive Tests\\in Bayesian and Credal Networks}
 %%\thanks{Supported by organization x.}}
 %\titlerunning{Abbreviated paper title}
-\author{permutation of Alessandro Antonucci \and
-Francesca Mangili \and
-Claudio Bonesana\and
+\author{Alessandro Antonucci \and
+Francesca Mangili \and\\
+Claudio Bonesana \and
 Giorgia Adorni}
-\authorrunning{F. Author et al.}
-\institute{Dalle Molle Institute for Artificial Intelligence USI-SUPSI -- IDSIA \\
+%\authorrunning{F. Author et al.}
+\institute{Istituto Dalle Molle di Studi sull'Intelligenza Artificiale, Lugano, Switzerland\\
 \email{\{alessandro,francesca,claudio.bonesana,giorgia.adorni\}@idsia.ch}}
-\maketitle          
+\maketitle
 \begin{abstract}
-A test is adaptive when the sequence and the number of questions is tuned on the basis of the estimated skill levels of the test taker. Graphical models such as Bayesian networks allow to model the uncertainty about the questions and the skills in an highly interpretable fashion, especially when coping with multiple skills. Yet, the quantification of the uncertainty in the question/skill relations can be better quantified by interval-valued probabilistic values in the model. This might make inference considerably harded in the underlying model, this being especially the case for the information theoretic quantity generally used for these models. We present.
-
-with xxx. Interval valued quantification
-
-
-We suggest the use of credal networks, a generalization of Bayesian networks based on sets of probability mass functions, to implement adaptive tests exploiting the knowledge of the test developer instead of training on databases of answers. Compared to Bayesian networks, these models might offer higher expressiveness and hence a more reliable modeling of the qualitative expert knowledge. The counterpart is a less straightforward identification of the 
-information-theoretic measure controlling the question-selection and the test-stopping criteria. We elaborate on these issues and propose a sound and computationally feasible procedure. Validation against a Bayesian-network approach 
-on a benchmark about German language proficiency assessments suggests that credal networks can be reliable in assessing the student level and  effective in reducing the number of questions required to do it.
-%\keywords{credal networks  \and adaptive test \and bayesian network.}
+A test is adaptive when the sequence and the number of questions is tuned on the basis of the estimated skills of the test taker. Graphical models such as Bayesian networks allow to model the uncertainty about the questions and the skills in an highly interpretable fashion, especially when coping with multiple skills. Yet, the quantification of the uncertainty in the question/skill relations can be better quantified by interval-valued probabilistic values in the model. This might make inference considerably harder in the underlying model, this being especially the case for the information theoretic quantities generally used as a score to drive the adaptation process.
+Here we present an alternative score based on the mode of the posterior probabilities of the model. We show how this makes considerably simpler the evaluation of the score in the credal case. Numerical tests are promising, we show how the performance are similar in the Bayesian network case, while xxx.
+%considered. 
+%We propose an alternative 
+%We present.
+%with xxx. Interval valued quantification
+%We suggest the use of credal networks, a generalization of Bayesian networks based on sets of probability mass functions, to implement adaptive tests exploiting the knowledge of the test developer instead of training on databases of answers. Compared to Bayesian networks, these models might offer higher expressiveness and hence a more reliable modeling of the qualitative expert knowledge. The counterpart is a less straightforward identification of the 
+%information-theoretic measure controlling the question-selection and the test-stopping criteria. We elaborate on these issues and propose a sound and computationally feasible procedure. Validation against a Bayesian-network approach on a benchmark about German language proficiency assessments suggests that credal networks can be reliable in assessing the student level and  effective in reducing the number of questions required to do it.
+%150-200 words - 12 pages
+\keywords{First keyword  \and Second keyword \and Another keyword.}
 \end{abstract}
+
 \section{Testing Algorithms}
 The typical goal of a test or exam is to evaluate the knowledge level of a student or examinee $\sigma$ on the basis of her answers to a number of questions or exercises. Let $\bm{Q}$ denote a repository of questions available to the instructor. The order and the number of questions from $\bm{Q}$ asked to $\sigma$ might not be fixed. We call \emph{testing algorithm} (TA) a procedure taking care of the selection of the sequence of questions asked to the student and able to decide when the test should stop. A standard TA pseudocode is in Algorithm \ref{alg:ta}, where $\bm{e}$ denotes the array of the answers collected from the student $\sigma$.
 
-\begin{algorithm}[htbp!]
-    \caption{Testing algorithm. Student profile $\sigma$ and question repository $\bm{Q}$ are inputs.}
+
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \KwResult{Write here the result }
+    initialization\;
+    \While{While condition}{
+        instructions\;
+        \eIf{condition}{
+            instructions1\;
+            instructions2\;
+        }{
+            instructions3\;
+        }
+    }
+    \caption{How to write algorithms}
+\end{algorithm}
+
+\begin{algorithm}[htp]
     \begin{algorithmic}[1]
     \STATE $\bm{e}=\emptyset$
         \WHILE{ {\bf not} $\tt{Stopping}(\bm{e})$}
@@ -107,7 +120,9 @@ The typical goal of a test or exam is to evaluate the knowledge level of a stude
         \ENDWHILE
         \STATE {\bf return} $\tt{Evaluate}(\bm{e})$
     \end{algorithmic}\label{alg:ta}
+\caption{Testing algorithm. Student profile $\sigma$ and question repository $\bm{Q}$ are inputs.}
 \end{algorithm}
+
 
 The Boolean function ${\tt Stopping}$ decides whether or not the test should end, this choice being possibly based on the previous answers as collected in $\bm{e}$. Trivial examples of such stopping rules might be based on the number of questions asked to the student (${\tt Stopping}(\bm{e})=1$ if and only if $|\bm{e}|>n$) or on the number of correct answers provided that a maximum number of questions is not exceeded. Function ${\tt PickQuestion}$ is instead in charge of deciding which question should be asked to the student from the repository $\bm{Q}$. A TA is called \emph{adaptive} when this function is based on the previous answers $\bm{e}$. Trivial non-adaptive strategies might consist in randomly picking an element of $\bm{Q}$ or following a fixed order. Function ${\tt Answer}$ is simply collecting (or simulating) the answer of the student $\sigma$ to a particular question $Q$. In our assumptions, this answer is not affected by the previous answers to other questions.\footnote{Generalized setups where the quality of the student answer is affected by the previous answers will be discussed at the end of the paper. This might include a \emph{fatigue} model negatively affecting the quality of the answers when many questions have been already answered as well as the presence of \emph{revealing} questions that might improve the quality of other answers.} 
 
@@ -121,6 +136,7 @@ Item response theory is a popular *** Something about IRT here ***. Most of thes
 In the setup of algorithm.
 
 Let us introduce the discussion by means of a simple example modelling the knowledge level of a student in a particular domain. In order to evaluate such level a number of questions can be asked to the student. We describe the knowledge level (or skill) of the student by means of a single variable $S$. We assume $S$ to be a discrete, ordinal, variable, whose $m$ states $\mathcal{S}:=(s^{(0)},\ldots,s^{(m-1)})$ can be intended as increasing knowledge levels in that domain. Regarding the questions, we initially describe them as Boolean variables, whose true state correspond to a correct answer to the question, while no distinctions between the possible wrong answers are considered.\footnote{Dedicated discussion about abstention.} Let $Q$ with $\mathcal{Q}:=(q,\overline{q})$ denote a generic question we ask to the student. A repository of $n$ questions $\bm{Q}$ is assumed to be available. A \emph{testing} algorithm is a procedure deciding which question and how many questions from $\bm{Q}$ should be asked to the student, on the basis of her previous answers. Algorithm X provides an abstract description of xxx.
+
 
 	%
 	%
@@ -189,34 +205,34 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 		\item Let $n_q$ be the maximum number of questions we might ask for each skill
 	\end{enumerate}
 	
-	\begin{algorithm}[htp!]
-		\caption{Single skill, precise model\\
-			a model (BN, skeleton) $M$ over the skills only
-			\\a dataset of $n$ students $\{s^i\}_{i=1}^n$,\\a dataset of $m$ questions 
-			$\mathcal{Q}:=\{Q^j\}_{j=1}^m$,\\
-			the CPTs of the questions in $\mathcal{Q}$, i.e., $\{P(Q^j|S)\}_{j=1}^m$\\
-			the student answer models $\{\tilde{P}(Q^j|S)\}$\\
-			an entropy threshold $h^*$,\\
-			a score function for questions $\gamma$
-			\label{alg:simple}}
-		\begin{algorithmic}[1]
-			\FOR {$i\gets\{1,\ldots,n\}$}
-			\STATE $(M',\mathcal{Q}',\mathcal{Q}'',\bm{e}) \gets 
-			(M,\mathcal{Q},\emptyset,\emptyset)$
-			\WHILE{ $h > h^* \mathrm{\bf and}\, \mathcal{Q}' \neq \mathcal{Q}$}
-			\STATE $Q^* \gets \arg\max_{Q \in \mathcal{Q}'}\gamma(M',Q,\bm{e})$
-			\STATE{$\mathcal{Q}'\gets \mathcal{Q}' \setminus \{ Q^*\}$}
-			\STATE{$\mathcal{Q}''\gets \mathcal{Q}'' \cup \{ Q^*\}$}
-			\STATE{$q^* \gets \mathrm{sampling} \sim \tilde{P}(Q^*|s^i)$}
-			\STATE $M' \gets \mathrm{addChild}(M',Q,S,P(Q|S))$
-			\STATE $\bm{e} \gets \bm{e} \cup \{ Q^*=q^* \}$
-			\STATE $h \gets H[P_{M'}(S|\bm{e})]$
-			\ENDWHILE
-			\STATE $\sigma_i \gets \arg\max_{s\in\mathcal{S}} P_{M'}(s|\bm{e})$
-			\ENDFOR
-			\STATE {\bf return} $(\sigma_1,\ldots,\sigma_n)$
-		\end{algorithmic}
-	\end{algorithm}
+%	\begin{algorithm}[htp!]
+%		\caption{Single skill, precise model\\
+%			a model (BN, skeleton) $M$ over the skills only
+%			\\a dataset of $n$ students $\{s^i\}_{i=1}^n$,\\a dataset of $m$ questions 
+%			$\mathcal{Q}:=\{Q^j\}_{j=1}^m$,\\
+%			the CPTs of the questions in $\mathcal{Q}$, i.e., $\{P(Q^j|S)\}_{j=1}^m$\\
+%			the student answer models $\{\tilde{P}(Q^j|S)\}$\\
+%			an entropy threshold $h^*$,\\
+%			a score function for questions $\gamma$
+%			\label{alg:simple}}
+%		\begin{algorithmic}[1]
+%			\FOR {$i\gets\{1,\ldots,n\}$}
+%			\STATE $(M',\mathcal{Q}',\mathcal{Q}'',\bm{e}) \gets 
+%			(M,\mathcal{Q},\emptyset,\emptyset)$
+%			\WHILE{ $h > h^* \mathrm{\bf and}\, \mathcal{Q}' \neq \mathcal{Q}$}
+%			\STATE $Q^* \gets \arg\max_{Q \in \mathcal{Q}'}\gamma(M',Q,\bm{e})$
+%			\STATE{$\mathcal{Q}'\gets \mathcal{Q}' \setminus \{ Q^*\}$}
+%			\STATE{$\mathcal{Q}''\gets \mathcal{Q}'' \cup \{ Q^*\}$}
+%			\STATE{$q^* \gets \mathrm{sampling} \sim \tilde{P}(Q^*|s^i)$}
+%			\STATE $M' \gets \mathrm{addChild}(M',Q,S,P(Q|S))$
+%			\STATE $\bm{e} \gets \bm{e} \cup \{ Q^*=q^* \}$
+%			\STATE $h \gets H[P_{M'}(S|\bm{e})]$
+%			\ENDWHILE
+%			\STATE $\sigma_i \gets \arg\max_{s\in\mathcal{S}} P_{M'}(s|\bm{e})$
+%			\ENDFOR
+%			\STATE {\bf return} $(\sigma_1,\ldots,\sigma_n)$
+%		\end{algorithmic}
+%	\end{algorithm}
 	Three possible scores:
 	\begin{eqnarray}
 		\gamma(Q,\bm{e}) := -H[S|Q,\bm{e}] = -\sum_q P(q) \cdot H[S|\bm{e},q]&&\\
@@ -233,32 +249,32 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 	they are all monotonic function of $\max_q(P(q))$ only. }
 	
 	
-	\begin{algorithm}[htp!]
-		\caption{Single skill, credal model\\a dataset of $n$ students $\{s^i\}_{i=1}^n$,\\a 
-		dataset of $m$ questions $\mathcal{Q}:=\{Q^j\}_{j=1}^m$,\\
-			the credal CPTs of the questions in $\mathcal{Q}$, i.e., 
-			$\{\overline{P}(Q^j|S)\}_{j=1}^m$\\
-			an upper entropy threshold $\overline{h}^*$,\\
-			a score function for questions $\sigma$
-			\label{alg:simple2}}
-		\begin{algorithmic}[1]
-			\FOR {$i\gets\{1,\ldots,n\}$}
-			\STATE $(\mathcal{Q}',\mathcal{Q}'',\bm{e}) \gets 
-			(\mathcal{Q},\emptyset,\emptyset)$
-			\WHILE{ $h > h^* \mathrm{\bf and}\, \mathcal{Q}' \neq \mathcal{Q}$}
-			\STATE $Q^* \gets \arg\max_{Q \in \mathcal{Q}'}\gamma(Q,\bm{e})$
-			\STATE{$\mathcal{Q}'\gets \mathcal{Q}' \setminus \{ Q^*\}$}
-			\STATE{$\mathcal{Q}''\gets \mathcal{Q}'' \cup \{ Q^*\}$}
-			\STATE{$q^* \gets \mathrm{sampling} \sim P(Q^*|s^i)$}
-			\STATE $\mathrm{addChild}(Q,S,P(Q|S))$
-			\STATE $\bm{e} \gets \bm{e} \cup \{ Q^*=q^* \}$
-			\STATE $h \gets H[P(S|\bm{e})]$
-			\ENDWHILE
-			\STATE $\sigma_i \gets \arg\max_{s\in\mathcal{S}} P(s|\bm{e})$
-			\ENDFOR
-			\STATE {\bf return} $(\sigma_1,\ldots,\sigma_n)$
-		\end{algorithmic}
-	\end{algorithm}
+%	\begin{algorithm}[htp!]
+%		\caption{Single skill, credal model\\a dataset of $n$ students $\{s^i\}_{i=1}^n$,\\a 
+%		dataset of $m$ questions $\mathcal{Q}:=\{Q^j\}_{j=1}^m$,\\
+%			the credal CPTs of the questions in $\mathcal{Q}$, i.e., 
+%			$\{\overline{P}(Q^j|S)\}_{j=1}^m$\\
+%			an upper entropy threshold $\overline{h}^*$,\\
+%			a score function for questions $\sigma$
+%			\label{alg:simple2}}
+%		\begin{algorithmic}[1]
+%			\FOR {$i\gets\{1,\ldots,n\}$}
+%			\STATE $(\mathcal{Q}',\mathcal{Q}'',\bm{e}) \gets 
+%			(\mathcal{Q},\emptyset,\emptyset)$
+%			\WHILE{ $h > h^* \mathrm{\bf and}\, \mathcal{Q}' \neq \mathcal{Q}$}
+%			\STATE $Q^* \gets \arg\max_{Q \in \mathcal{Q}'}\gamma(Q,\bm{e})$
+%			\STATE{$\mathcal{Q}'\gets \mathcal{Q}' \setminus \{ Q^*\}$}
+%			\STATE{$\mathcal{Q}''\gets \mathcal{Q}'' \cup \{ Q^*\}$}
+%			\STATE{$q^* \gets \mathrm{sampling} \sim P(Q^*|s^i)$}
+%			\STATE $\mathrm{addChild}(Q,S,P(Q|S))$
+%			\STATE $\bm{e} \gets \bm{e} \cup \{ Q^*=q^* \}$
+%			\STATE $h \gets H[P(S|\bm{e})]$
+%			\ENDWHILE
+%			\STATE $\sigma_i \gets \arg\max_{s\in\mathcal{S}} P(s|\bm{e})$
+%			\ENDFOR
+%			\STATE {\bf return} $(\sigma_1,\ldots,\sigma_n)$
+%		\end{algorithmic}
+%	\end{algorithm}
 	Three possible scores:
 	\begin{eqnarray}
 		\gamma(Q,\bm{e}) := -H[S|Q,\bm{e}] = -\sum_q P(q) \cdot H[S|\bm{e},q]&&\\
@@ -269,20 +285,20 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 	
 	
 	
-	\begin{algorithm}[htp!]
-		\caption{Given a dataset of student profiles $\bm{S}$\label{alg:simple3}}
-		\begin{algorithmic}[1]
-			\FOR {$s\in\bm{S}$}
-			\WHILE{ $h > h^*$}
-			\STATE $Q^* \gets \mathrm{FindBestQuestion}(\bm{Q}$)
-			\STATE $q^* \gets \mathrm{SimulateAnswer}(\sigma)$
-			\STATE $\bm{e} \gets \bm{e} \cup \{ Q^*=q^* \}$
-			\STATE $h \gets H[P(S|\bm{e}]$
-			\ENDWHILE
-			\ENDFOR
-			\STATE {\bf return} $\arg\max P(s|\bm{e})$
-		\end{algorithmic}
-	\end{algorithm}
+%	\begin{algorithm}[htp!]
+%		\caption{Given a dataset of student profiles $\bm{S}$\label{alg:simple3}}
+%		\begin{algorithmic}[1]
+%			\FOR {$s\in\bm{S}$}
+%			\WHILE{ $h > h^*$}
+%			\STATE $Q^* \gets \mathrm{FindBestQuestion}(\bm{Q}$)
+%			\STATE $q^* \gets \mathrm{SimulateAnswer}(\sigma)$
+%			\STATE $\bm{e} \gets \bm{e} \cup \{ Q^*=q^* \}$
+%			\STATE $h \gets H[P(S|\bm{e}]$
+%			\ENDWHILE
+%			\ENDFOR
+%			\STATE {\bf return} $\arg\max P(s|\bm{e})$
+%		\end{algorithmic}
+%	\end{algorithm}
 	
 	
 	
@@ -374,13 +390,13 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 		(1-p)(1-\pi_0)}{p (1-\pi_1)}} 
 	\end{equation}
 	while $P(S=0|Q=1)$ by normalization. Accordingly:
-	\begin{multline}
-		\sigma_Q(p,\pi_0,\pi_1)=\\
-		h \circ f[\gamma/l(p)] \cdot t +
-		h \circ f[\gamma'/l(p)] \cdot (1-t)\,
-		%\theta(\frac{\pi_0(1-p)}{\pi_1 p}) [\pi_1 p + \pi_0 (1-p)]\\
-		%+ \theta(\frac{ (1-p)(1-\pi_0)}{p (1-\pi_1)}) [1-\pi_1 p + \pi_0 (1-p)]
-	\end{multline}
+%	\begin{multline}
+%		\sigma_Q(p,\pi_0,\pi_1)=\\
+%		h \circ f[\gamma/l(p)] \cdot t +
+%		h \circ f[\gamma'/l(p)] \cdot (1-t)\,
+%		%\theta(\frac{\pi_0(1-p)}{\pi_1 p}) [\pi_1 p + \pi_0 (1-p)]\\
+%		%+ \theta(\frac{ (1-p)(1-\pi_0)}{p (1-\pi_1)}) [1-\pi_1 p + \pi_0 (1-p)]
+%	\end{multline}
 	where $\gamma = \frac{\pi_0}{\pi_1}$, $\gamma' = \frac{1-\pi_0}{1-\pi_1}$, and $t = \pi_1 
 	p + \pi_0 (1-p)$.
 	
@@ -431,33 +447,33 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 		P(s_1|q_1)=\frac{\pi_1 p}{P(q_1)}
 	\end{equation}
 	
-	\begin{multline}
-		\sigma_Q(p,\pi_0,\pi_1)=\\
-		m\bigl(\frac{\pi_1 p}{P(q_1)}\bigr) \cdot P(q_1)  +
-		m\bigl(\frac{(1-\pi_1) p}{1-P(q_1)}\bigr) \cdot (1-P(q_1))\,
-	\end{multline}
+%	\begin{multline}
+%		\sigma_Q(p,\pi_0,\pi_1)=\\
+%		m\bigl(\frac{\pi_1 p}{P(q_1)}\bigr) \cdot P(q_1)  +
+%		m\bigl(\frac{(1-\pi_1) p}{1-P(q_1)}\bigr) \cdot (1-P(q_1))\,
+%	\end{multline}
 	
 	But, as $P(q_1)\geq 0$, then
-	\begin{multline}
-		m\bigl(\frac{\pi_1 p}{P(q_1)}\bigr) =\\
-		2max\bigl(\frac{\pi_1 p}{P(q_1)},1-\frac{\pi_1 p}{P(q_1)} \bigr) =\\
-		2max\bigl(\frac{\pi_1 p}{P(q_1)},\frac{\pi_0(1- p)}{P(q_1)} \bigr) =\\
-		\frac{2}{P(q_1)}max\bigl(\pi_1 p,\pi_0(1- p)\bigr).\\
-	\end{multline}
+%	\begin{multline}
+%		m\bigl(\frac{\pi_1 p}{P(q_1)}\bigr) =\\
+%		2max\bigl(\frac{\pi_1 p}{P(q_1)},1-\frac{\pi_1 p}{P(q_1)} \bigr) =\\
+%		2max\bigl(\frac{\pi_1 p}{P(q_1)},\frac{\pi_0(1- p)}{P(q_1)} \bigr) =\\
+%		\frac{2}{P(q_1)}max\bigl(\pi_1 p,\pi_0(1- p)\bigr).\\
+%	\end{multline}
 	
 	Similarly, as $1-P(q_1)\geq 0$, 
-	\begin{multline}
-		m\bigl(\frac{(1-\pi_1) p}{1-P(q_1)}\bigr) =\\
-		\frac{2}{1-P(q_1)}max\bigl((1-\pi_1) p,(1-\pi_0)(1- p)\bigr),\\
-	\end{multline}
+%	\begin{multline}
+%		m\bigl(\frac{(1-\pi_1) p}{1-P(q_1)}\bigr) =\\
+%		\frac{2}{1-P(q_1)}max\bigl((1-\pi_1) p,(1-\pi_0)(1- p)\bigr),\\
+%	\end{multline}
 	
 	so that,
 	
-	\begin{multline}
-		\sigma_Q(p,\pi_0,\pi_1)= \\
-		2 max\{\pi_1 p, \pi_0 (1-p)\}+
-		2 max\{(1-\pi_1 )p, (1-\pi_0) (1-p)\}\,
-	\end{multline}
+%	\begin{multline}
+%		\sigma_Q(p,\pi_0,\pi_1)= \\
+%		2 max\{\pi_1 p, \pi_0 (1-p)\}+
+%		2 max\{(1-\pi_1 )p, (1-\pi_0) (1-p)\}\,
+%	\end{multline}
 	
 	Comment 4: The optimisation in the credal setting shouldn't be the following one?
 	
@@ -478,34 +494,34 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 	
 	However I think we can split the optimization into 4 quadratic optimizations.
 	Let's use the following parametrization:
-	\begin{multline}\label{eq:minimization}
-		\min_{p,\pi_0,\pi_1} \sigma_Q(p,\pi_0,\pi_1) = \\
-		2\min_{p,\pi_0,\pi_1} \bigl( \max\{\pi_1 p, \pi_0 (1-p)\} + \\
-		~~~ \max\{(1-\pi_1 )p, (1-\pi_0) (1-p)\} \bigr) \approx \\
-		2 \bigl( \min_{p,\pi_0,\pi_1}  \max\{\pi_1 p, \pi_0 (1-p)\} + \\
-		~~~ \min_{p,\pi_0,\pi_1} \max\{(1-\pi_1 )p, (1-\pi_0) (1-p)\} \bigr) 
-	\end{multline}
+%	\begin{multline}\label{eq:minimization}
+%		\min_{p,\pi_0,\pi_1} \sigma_Q(p,\pi_0,\pi_1) = \\
+%		2\min_{p,\pi_0,\pi_1} \bigl( \max\{\pi_1 p, \pi_0 (1-p)\} + \\
+%		~~~ \max\{(1-\pi_1 )p, (1-\pi_0) (1-p)\} \bigr) \approx \\
+%		2 \bigl( \min_{p,\pi_0,\pi_1}  \max\{\pi_1 p, \pi_0 (1-p)\} + \\
+%		~~~ \min_{p,\pi_0,\pi_1} \max\{(1-\pi_1 )p, (1-\pi_0) (1-p)\} \bigr) 
+%	\end{multline}
 	
 	Let's consider the first optimization $\min_{p,\pi_0,\pi_1}  \max\{\pi_1 p, \pi_0 (1-p)\}$. It 
 	can be written as
 	$$ \min(\tilde{P}(s=0,q),\tilde{P}(s=1,q)) $$ 
 	where 
 
-	\begin{multline}
-		\tilde{P}(s=0,q) = \min_{\pi_1 ,p} \pi_1 p \\
-		\begin{array}{ll}
-			\text{subject to} & \pi_1 p > \pi_0 (1-p) \\
-			~&\underline{x} \leq x\leq \overline{x}\\ 
-		\end{array}
-	\end{multline}
+%	\begin{multline}
+%		\tilde{P}(s=0,q) = \min_{\pi_1 ,p} \pi_1 p \\
+%		\begin{array}{ll}
+%			\text{subject to} & \pi_1 p > \pi_0 (1-p) \\
+%			~&\underline{x} \leq x\leq \overline{x}\\ 
+%		\end{array}
+%	\end{multline}
 	and 
-	\begin{multline}
-		\tilde{P}(s=1,q) = \min_{\pi_0 ,p} \pi_0 (1-p) \\
-		\begin{array}{ll}
-			\text{subject to} & \pi_1 p < \pi_0 (1-p)\\
-			~&\underline{x} \leq x\leq \overline{x}\\ 
-		\end{array}
-	\end{multline}
+%	\begin{multline}
+%		\tilde{P}(s=1,q) = \min_{\pi_0 ,p} \pi_0 (1-p) \\
+%		\begin{array}{ll}
+%			\text{subject to} & \pi_1 p < \pi_0 (1-p)\\
+%			~&\underline{x} \leq x\leq \overline{x}\\ 
+%		\end{array}
+%	\end{multline}
 	
 	where the constraint $x = (\pi_0, \pi_1 ,p)$.
 	
@@ -517,28 +533,27 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 	In this two dimensional example, we might not need the approximation above as the 
 	minimization in \ref{eq:minimization} can be written as $\min_{i=1:4}(\tilde{P}_1)$, where
 	
-	\begin{multline}
-		\tilde{P}_1 = \min_{\pi_0,\pi_1,p} \pi_1 p+ (1-\pi_1)p = p \\
-		\begin{array}{ll}
-			\text{subject to} & \pi_1 p > \pi_0 (1-p) \\
-			~&  (1-\pi_1)p > (1-\pi_0)(1-p)  \\
-			~&\underline{x} \leq x\leq \overline{x}\\ 
-		\end{array}
-	\end{multline}
+%	\begin{multline}
+%		\tilde{P}_1 = \min_{\pi_0,\pi_1,p} \pi_1 p+ (1-\pi_1)p = p \\
+%		\begin{array}{ll}
+%			\text{subject to} & \pi_1 p > \pi_0 (1-p) \\
+%			~&  (1-\pi_1)p > (1-\pi_0)(1-p)  \\
+%			~&\underline{x} \leq x\leq \overline{x}\\ 
+%		\end{array}
+%	\end{multline}
 	and so on. However, in this case, the number of optimizations to solve should be 
 	$N_s^{N_q}$, that is, it grows exponentially with  $N_q$. 
 	
 	
 	\paragraph{*** Alessandro's reformulation ***}
-	\begin{equation}
-		\begin{split}
-			\text{min} \displaystyle \, \pi_1 \cdot p \\
-			\text{subject to} & \displaystyle \pi_1 p > \pi_0 (1-p)\\
-			&\displaystyle \underline{\pi}_0 \leq \pi_0 \leq \overline{\pi}_0 \\
-			&\displaystyle \underline{\pi}_1 \leq \pi_1 \leq \overline{\pi}_1 \\
-			&\displaystyle \underline{p} \leq p \leq \overline{p} \\
-		\end{split}
-	\end{equation}
+%	\begin{equation}
+%		\begin{split}
+%			\text{min} \displaystyle \, \pi_1 \cdot p \\
+%			\text{subject to} & \displaystyle \pi_1 p > \pi_0 (1-p)\\
+%			&\displaystyle \underline{\pi}_0 \leq \pi_0 \leq \overline{\pi}_0 \\
+%			&\displaystyle \underline{\pi}_1 \leq \pi_1 \leq \overline{\pi}_1 \\
+%%		\end{split}
+%	\end{equation}
 	with the new variable specification:
 	\begin{eqnarray}
 		x_1&:=&\pi_1 \cdot p \,,\\
@@ -547,15 +562,15 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 		x_4&:=& \pi_0 \cdot (1-p)\,.\\
 	\end{eqnarray}
 	the problem becomes:
-	\begin{equation}
-		\begin{split}
-			\text{min} \displaystyle \, x_1 \\
-			\text{subject to\phantom{xx}} & \displaystyle x_1 > x_4\\
-			&\displaystyle \underline{\pi}_0 \leq x_2+x_3 \leq \overline{\pi}_0 \\
-			&\displaystyle \underline{\pi}_1 \leq x_1+x_4 \leq \overline{\pi}_1 \\
-			&\displaystyle \underline{p} \leq x_1+x_3 \leq \overline{p} \\
-		\end{split}
-	\end{equation}
+%	\begin{equation}
+%		\begin{split}
+%			\text{min} \displaystyle \, x_1 \\
+%			\text{subject to\phantom{xx}} & \displaystyle x_1 > x_4\\
+%			&\displaystyle \underline{\pi}_0 \leq x_2+x_3 \leq \overline{\pi}_0 \\
+%			&\displaystyle \underline{\pi}_1 \leq x_1+x_4 \leq \overline{\pi}_1 \\
+%			&\displaystyle \underline{p} \leq x_1+x_3 \leq \overline{p} \\
+%		\end{split}
+%	\end{equation}
 	
 	
 	\section{Introduction}\label{sec:intro}
@@ -689,42 +704,44 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 		\label{eq:expent}
 	\end{equation}
 	
-	\begin{figure*}[htp!]
-		\centering
-		\begin{tikzpicture}[auto,scale=.7]
-			\node[node distance=.cm,fill=black!10] (pick) 
-			{\begin{varwidth}{1.5cm}\tiny\centering PICK A QUESTION \end{varwidth}};
-			\node[cloud, left of=pick,node distance=3cm,fill=black!5] (db) 
-			{\begin{varwidth}{1.5cm}\tiny\centering QUESTIONS DATABASE\end{varwidth}};
-			\node[right of=pick,node distance=3cm,fill=black!10] (ask) 
-			{\begin{varwidth}{1.5cm}\tiny\centering ASK QUESTION\end{varwidth}};
-			\node[right of=ask,node distance=3cm,fill=black!10] (collect) 
-			{\begin{varwidth}{1.5cm}\tiny\centering COLLECT ANSWER\end{varwidth}};
-			\node[below of=collect,node distance=1.4cm] (decide) 
-			{\begin{varwidth}{1.5cm}\tiny\centering \textbf{STOPPING RULE? 
-			}\end{varwidth}};
-			\node[ left of=decide, node distance=3cm,fill=black!10] (stop) 
-			{\begin{varwidth}{1.5cm}\tiny\centering END TEST\end{varwidth}};
-			\node[left of=stop, node distance=3cm,fill=black!10] (assign) 
-			{\begin{varwidth}{1.5cm}\tiny\centering ASSIGN LEVELS \end{varwidth}};
-			\draw[] (decide) -- node {\tiny YES}(stop);
-			\draw[] (decide) -- node[pos=0.1,above] {\tiny NO}(pick);
-			\draw[dashed] (db) -- (pick);
-			\draw[] (pick) -- (ask);
-			\draw[] (ask) -- (collect);
-			\draw[] (collect) -- (decide);
-			\draw[] (decide) -- (stop);
-			\draw[] (stop) -- (assign);
-		\end{tikzpicture}
-		\caption{CAT procedure}
-		\label{fig:alg}
-		%\vspace{-1cm}
-	\end{figure*}
+%	\begin{figure*}[htp!]
+%		\centering
+%		\begin{tikzpicture}[auto,scale=.7]
+%			\node[node distance=.cm,fill=black!10] (pick) 
+%%			{\begin{varwidth}{1.5cm}\tiny\centering PICK A QUESTION \end{varwidth}};
+%			\node[cloud, left of=pick,node distance=3cm,fill=black!5] (db) 
+%%			{\begin{varwidth}{1.5cm}\tiny\centering QUESTIONS DATABASE\end{varwidth}};
+%			\node[right of=pick,node distance=3cm,fill=black!10] (ask) 
+%%			{\begin{varwidth}{1.5cm}\tiny\centering ASK QUESTION\end{varwidth}};
+%			\node[right of=ask,node distance=3cm,fill=black!10] (collect) 
+%%			{\begin{varwidth}{1.5cm}\tiny\centering COLLECT ANSWER\end{varwidth}};
+%			\node[below of=collect,node distance=1.4cm] (decide) 
+%%			{\begin{varwidth}{1.5cm}\tiny\centering \textbf{STOPPING RULE? 
+%%			}\end{varwidth}};
+%			\node[ left of=decide, node distance=3cm,fill=black!10] (stop) 
+%%			{\begin{varwidth}{1.5cm}\tiny\centering END TEST\end{varwidth}};
+%			\node[left of=stop, node distance=3cm,fill=black!10] (assign) 
+%%			{\begin{varwidth}{1.5cm}\tiny\centering ASSIGN LEVELS \end{varwidth}};
+%			\draw[] (decide) -- node {\tiny YES}(stop);
+%			\draw[] (decide) -- node[pos=0.1,above] {\tiny NO}(pick);
+%			\draw[dashed] (db) -- (pick);
+%			\draw[] (pick) -- (ask);
+%			\draw[] (ask) -- (collect);
+%			\draw[] (collect) -- (decide);
+%			\draw[] (decide) -- (stop);
+%			\draw[] (stop) -- (assign);
+%		\end{tikzpicture}
+%		\caption{CAT procedure}
+%		\label{fig:alg}
+%		%\vspace{-1cm}
+%	\end{figure*}
 	
-	CATs should also decide when to stop asking questions. Again, entropy can be used as 
-	a measure to decide when the current evaluation is sufficiently informative, i.e., we stop 
-	the test if the skills entropy given the answers is below some threshold $\tilde{H}$. The 
-	overall approach is depicted in Fig.~\ref{fig:alg}.
+CATs should also decide when to stop asking questions. Again, entropy can be used as 
+a measure to decide when the current evaluation is sufficiently informative, i.e., we stop 
+the test if the skills entropy given the answers is below some threshold $\tilde{H}$. The 
+overall approach is depicted in Fig.~\ref{fig:alg}.
+
+
 	
 	\section{Credal CAT}
 	
@@ -781,6 +798,8 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 	probable than another level for all the elements of the CS \cite{walley1991statistical}. 
 	Maximality  can be reduced to multiple updating tasks on auxiliary binary leaf nodes 
 	defined for each pair of states \cite{antonucci2014e}.
+
+
 	
 	\paragraph{Adaptive testing.}
 	To achieve CAT with CNs using entropy as measure of informativeness for PMFs, as in 
@@ -799,6 +818,9 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 	function might, then, be non-convex, as the weights are also optimization 
 	variables.\footnote{E.g., if $f(x)$ and $g(x)$ are convex functions of $x$, $h(x,y):= y 
 	f(x) + (1-y) g(x)$ is not convex even for $0 \leq y \leq 1$.} 
+
+
+
 	
 	Then, to bypass this non-convex optimization task, we compute (i) by separately 
 	considering the entropies of each skill $X_i\in\bm{X}$. This is analogous to the marginal 
@@ -834,7 +856,7 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 	%$\overline{H}(X|\bm{y})$ and is regarded here as a measure of the informativeness 
 	%level 
 	%achieved for skill $X$ after the answers $\bm{y}$. 
-	Finally, to generalise Eq.~\eqref{eq:strongext} to CNs, we define the information gain 
+	Finally, to generalise Eq.~\ref{eq:strongext} to CNs, we define the information gain 
 	provided by a question $Y'$ for its background skill $X_{Y'}$ as 
 	$\overline{\overline{H}}(X_{Y'}|\bm{y})-\overline{\overline{H}}(X_{Y'}|Y',\bm{y})$ and 
 	select the question $\tilde{Y}'$ leading to the maximum information gain, i.e.,
@@ -862,6 +884,7 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 	to all the questions have been collected. This benchmark is used to simulate CATs 
 	based on BNs and CNs as described in Sects.~\ref{sec:bayesianCAT} and 
 	\ref{sec:credalCAT}.
+%\end{document}
 	
 	\paragraph{Model elicitation.}
 	Four skills are assessed: \textit{W\"ortschatz} ($X_1$, vocabulary), 
