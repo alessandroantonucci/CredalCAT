@@ -1,0 +1,37 @@
+%% This is the style file for ISIPTA 2021 contributions
+
+% Packages and fonts we enforce
+\usepackage[utf8]{inputenc} % use many international symbols such as accented letters directly (e.g., é instead of \'e)
+\usepackage{mathtools} % fixes and extends amsmath
+  \mathtoolsset{mathic}
+  \allowdisplaybreaks
+% font setup
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{mathptmx}
+\usepackage[scaled]{helvet}
+\usepackage{courier}
+\usepackage{microtype}
+  \frenchspacing
+
+% Tweaks to JMLR class
+% Lengths
+\setlength{\hoffset}{-1in} % undo defaul 1in offset
+% widths should sum up to 21cm, as we take A4 by default
+\setlength{\oddsidemargin}{2cm} % count this twice if you want equal margins
+\setlength{\textwidth}{17cm} % change the text width here
+\setlength{\columnsep}{7mm} % column sep is separate, not counted
+% total height should be less that 11in, because we want to support Letter
+% we just tweak the class defaults
+\addtolength{\textheight}{.6in} % change the text height here
+\addtolength{\topmargin}{-.1in} % but compensate by subtracting half that here
+\addtolength{\headsep}{-.2in} % but compensate by subtracting half that here
+% but we balance the vertical alignment for the default A4 paper (options are passed to packages by the class)
+\DeclareOption{a4paper}{\addtolength{\topmargin}{+.3in}}\ProcessOptions
+
+% What is shown in the top-left header; to be changed for the published version
+\jmlrpages{}
+\jmlrproceedings{}{} % comment to get default one
+\jmlrvolume{}
+\jmlryear{}
