@@ -64,7 +64,7 @@
 %	shadows}
 %\usepackage{trace-pgfkeys}
 \begin{document}
-\title{Approximating Information-Theoretic Scores\\for Computer Adaptive Tests\\in Bayesian and Credal Networks}
+\title{Information Theoretic Scores Approximation for Adaptive Tests in Bayesian and Credal Networks}
 %%\thanks{Supported by organization x.}}
 %\titlerunning{Abbreviated paper title}
 \author{Alessandro Antonucci \and
@@ -76,52 +76,63 @@ Giorgia Adorni}
 \email{\{alessandro,francesca,claudio.bonesana,giorgia.adorni\}@idsia.ch}}
 \maketitle
 \begin{abstract}
-A test is adaptive when the sequence and the number of questions is tuned on the basis of the estimated skills of the test taker. Graphical models such as Bayesian networks allow to model the uncertainty about the questions and the skills in an highly interpretable fashion, especially when coping with multiple skills. Yet, the quantification of the uncertainty in the question/skill relations can be better quantified by interval-valued probabilistic values in the model. This might make inference considerably harder in the underlying model, this being especially the case for the information theoretic quantities generally used as a score to drive the adaptation process.
-Here we present an alternative score based on the mode of the posterior probabilities of the model. We show how this makes considerably simpler the evaluation of the score in the credal case. Numerical tests are promising, we show how the performance are similar in the Bayesian network case, while xxx.
-%considered. 
-%We propose an alternative 
-%We present.
-%with xxx. Interval valued quantification
-%We suggest the use of credal networks, a generalization of Bayesian networks based on sets of probability mass functions, to implement adaptive tests exploiting the knowledge of the test developer instead of training on databases of answers. Compared to Bayesian networks, these models might offer higher expressiveness and hence a more reliable modeling of the qualitative expert knowledge. The counterpart is a less straightforward identification of the 
-%information-theoretic measure controlling the question-selection and the test-stopping criteria. We elaborate on these issues and propose a sound and computationally feasible procedure. Validation against a Bayesian-network approach on a benchmark about German language proficiency assessments suggests that credal networks can be reliable in assessing the student level and  effective in reducing the number of questions required to do it.
+A test is \emph{adaptive} when its sequence and number of questions is tuned on the basis of the estimated skills of the test taker. Graphical models such as Bayesian networks allow to model the uncertainty about the questions and the skills in an highly interpretable fashion, especially when coping with multiple skills. Yet, a better elicitation of the question/skill uncertainty can be achieved by interval-valued probabilities. This transforms the model into a credal network, thus making the inferential complexity of the queries required to select the questions considerably harder. This is especially the case for the information theoretic quantities generally used as a score to drive the adaptation process. Here we present an alternative family of scores based on the mode of the posterior probabilities. We show how this makes considerably simpler the evaluation of the score in the credal case, without significantly affecting the quality of the adaptive process. Numerical tests involving synthetic and real-world data are used to support our thesis.
 %150-200 words - 12 pages
-\keywords{First keyword  \and Second keyword \and Another keyword.}
+\keywords{Computer adaptive tests \and Information theory \and Credal networks \and Bayesian networks}
 \end{abstract}
 
+\section{Introduction}
+A test or an exam can be naturally intended as a measurement process, with the questions acting as sensors measuring the skills of the test taker in a particular discipline. Such a measurement is typically imperfect with the skills acting as latent variables whose actual values cannot be revealed in a perfectly reliable why. The role of the questions, whose answers are regarded as manifest variables, is to reduce the uncertainty about the latent skills. Following this perspective, probabilistic modelling is an obvious framework to describe a test. Consider for instance the example in Figure X, where minimalistic Bayesian network is used to describe the probability of the test taker having or not having understood how to multiply numbers. In such a framework making the test \emph{adaptive}, i.e., picking a next question on the basis of the current knowledge level of the test takes is also very natural. The expected information gain for the available questions might be naturally used to select the question leading to the more informative results about the skill level of the student, this taking place before the answer to the question on the basis of the expectation about the answer of the question taker. 
 
-\section{A Toy Example}
-As a first, demonstrative, example of our ideas consider a model characterized by a single (Boolean) Skill $S$ and a set of questions $\bm{Q}$ picked from a set of templates. Let us first focus on a Bayesian, i.e., precise, case. The prior specification $P(S)$ is achieve by a single parameter $p \in [0,1]$ such that $P(S=1)=p$. For a generic question $Q$, which is also assumed to be Boolean, a complete specification of the CPT $P(Q|S)$ is obtained by the two parameters $p_0,p_1\in [0,1]$ where $P(Q=1|S=0)=p_0$ and $P(Q=1|S=1)=p_1$. In other wrods $p_0$ denote the probability of providing a right answer to the question for a student who does not have the considered skill and $p_1$ for a student who have that skill. An obvious constraint is $p_1>p_0$, i.e., having the skill makes your probability of providing a right answer higher. The inequality should be strict, otherwise the two probabilities are equal, and this means that the answer is irrelevant for the skill. Although parameters $p_1$ and $p_0$ already give a complete parametrization, we perform the linear transformation
-$\lambda:=1-\frac{1}{2}(p_0+p_1)$ and $\delta=(p_1-p_0)$. The first quantity is the arithmetic average of giving a wrong answer and we might indent it as the \emph{level} of the question, this mining that the higher is $\lambda$ the more unlikely is to receive a correct answer is the students have the same probability of having and not having the skill. Regarding $\delta$ we might intend it as the (average) discriminative power of a question.
-Note that the inverse relations give $p_1=1-\lambda+\frac{\delta}{2}$
-and $p_0=1-\lambda-\frac{\delta}{2}$. Where constraint $p_1>p_0$ is just $\delta>0$ and any other value in $[0,1]$ for both parameters is valid.
+An important issue when coping with such approaches is providing a realistic assessment for the probabilistic parameters associated with the modelling of the relations between the questions and the skills. Having to provide sharp numerical numbers for these probabilities might be critical: as the skill is typically a latent quantity complete data are not available for a statistical learning of the parameters and the elicitaion is typically demanded to experts (e.g., the teacher). Yet, it might be not obvious to express such a domain knowledge by single number and more robust eliicitation such as ranges of probability might add realism and robustness to the models. Under such a generalized setup, a Bayesian network approach would correspond to cope with a credal network instead. Yet, the higher computational complexity characterizing the inference in credal networks, might become a critical issue. This is especially the case when coping with information theoretic measures such a information gain, whose computation might lead to highly non-linear optimization tasks. The goal of this paper is to investigate the role of alternatives to information theoretic score in order to drive the question selection in adaptive tests. In particular we consider a family of scores based on the (expected) mode of the posterior distributions over the skill. We show that, when coping with credal networks, even these scores can be computed by reduction to xxx.
 
+The paper is organized as follows. A critical discussion about the existing work in this field is in Section \ref{sec:work}, while the necessary background material is reviewed in Section \ref{sec{background}}. The technical part of the paper is in Section X, while the experiments are in Section X. Conclusions and outlooks are in Section X.
 
-In our toy example, we consider nine possible templates, made of triads of templates with the same $\delta$ and same $\lambda$. The reference values $[0.4,0.5,0.6]$ are used.
-
+\section{Related Work}\label{sec:work}
 
 
+
+
+
+
+Apart from graphical models, adaptive algorithms have been proposed within a genetic optimization framework.
+
+
+The idea of using Bayesian network in grading environment is not new. xxx.
+
+As already noticed in the previous section, the latent nature of the student skills might hinder the direct statistical learning of the parameters of such models. This naturally led some authors to consider missing data modelling. In particular the work of xxxx Vomlel related to EM algorithm in Bayesian networks is a notable example of this kind of approaches. Some other authors considered even more extreme directions involving missingness even about the answers such as \cite{bachrach2012grade}.
+This is also related to the notion of monotonicity \cite{plajner2020monotonicity}.
+
+
+\section{Background}
+\subsection*{Basic Precise and Imprecise Probability Theory}
+We denote variables by Latin uppercase letters, lowercase for their generic values, and calligraphic ones for the set of their possible values. Thus $x \in \mathcal{X}$ is a possible value of $X$. Here only variable with a finite number of possible values is considered.\footnote{IRT is using continuous variables xxx}. A probability mass function over $X$ is denote as $P(X)$, while $P(x)$ is the probability assigned to state $x$. A joint PMF is similarly denotes as $P(X,Y)$. Conditional probabilities are obtained by xxx. Conditional independence. Expectations for a function $f$ of xxx. Entropy is denotes as $H(X)$. 
+
+A credal set (CS) is a set of PMFs. $K(X)$ denote a CS over $X$, i.e., a set of PMFs over $X$. 
+
+\subsection*{Bayesian and Credal Networks}
+Let $\mathcal{G}$ be a directed acyclig graph whose nodes are in one-to-one correspondence with a set of variables $\bm{X}$. A BN is just a xx A credal network is xxx.
 
 
 \section{Testing Algorithms}
 The typical goal of a test or exam is to evaluate the knowledge level of a student or examinee $\sigma$ on the basis of her answers to a number of questions or exercises. Let $\bm{Q}$ denote a repository of questions available to the instructor. The order and the number of questions from $\bm{Q}$ asked to $\sigma$ might not be fixed. We call \emph{testing algorithm} (TA) a procedure taking care of the selection of the sequence of questions asked to the student and able to decide when the test should stop. A standard TA pseudocode is in Algorithm \ref{alg:ta}, where $\bm{e}$ denotes the array of the answers collected from the student $\sigma$.
 
 
-
-\begin{algorithm}[H]
-    \SetAlgoLined
-    \KwResult{Write here the result }
-    initialization\;
-    \While{While condition}{
-        instructions\;
-        \eIf{condition}{
-            instructions1\;
-            instructions2\;
-        }{
-            instructions3\;
-        }
-    }
-    \caption{How to write algorithms}
-\end{algorithm}
+%\begin{algorithm}[H]
+%    \SetAlgoLined
+%    \KwResult{Write here the result }
+%    initialization\;
+%    \While{$\neg \tt{Stopping}(\bm{e})$}{
+%        instructions\;
+%        %\eIf{condition}{
+%        %    instructions1\;
+%        %    instructions2\;
+%        %}{
+%        %    instructions3\;
+%        %}
+%    }
+%    \caption{How to write algorithms}
+%\end{algorithm}
 
 \begin{algorithm}[htp]
     \begin{algorithmic}[1]
@@ -142,11 +153,16 @@ The Boolean function ${\tt Stopping}$ decides whether or not the test should end
 
 Finally, the ${\tt Evaluate}$ function decides the overall judgement for the test (e.g., a numerical grade or a pass/fail Boolean) on the basis of all the answers collected after the test termination. Trivial examples of such function are the percentage of correct answers or a Boolean that is true when a sufficient percentage of correct answers has been provided. Note also that in our assumptions the TA is \emph{exchangeable}, i.e., the stopping rule, the question finder and the evaluation function are invariant with respect to permutations of $\bm{e}$. In other words, the would pick the same next question and the same evaluation for two students who provided the same list of answers in two different orders and similarly would decide to stop or not to stop in the same way. 
 
-The typical goal of a TA is to achieve a reliable evaluation of the student $\sigma$. As each answer is assumed to improve such quality, asking all the questions, no matter their order because of the exchangeability assumption, would be an obvious choice. Yet, asking all the questions in the repository might be impractical (e.g., because of time limitations) in some cases or just provide an unnecessary burden to the students. The goal of a good TA is therefore to trade off the accuracy of the evaluation and the number of questions.\footnote{In some generalized setups, other elements such as the \emph{serendipity} to avoid boring sequences of questions might be also considered.}
+The typical goal of a TA is to achieve a reliable evaluation of the student $\sigma$ after the answers $\bm{e}$. As each answer is assumed to improve such quality, asking all the questions, no matter their order because of the exchangeability assumption, would be an obvious choice. Yet, asking all the questions in the repository might be impractical (e.g., because of time limitations) in some cases or just provide an unnecessary burden to the students. The goal of a good TA is therefore to trade off the accuracy of the evaluation and the number of questions.\footnote{In some generalized setups, other elements such as the \emph{serendipity} to avoid boring sequences of questions might be also considered.}
 
 Item response theory is a popular *** Something about IRT here ***. Most of these approaches are based an a unidimensional representation of the student knowledge level. Proposals to cope with multidimensional IRTs have been considered, but this results critical when coping with dependencies between them. For this reason probabilistic modelling can be considered. This is the topic of the next section.
 
 \section{Bayesian Adaptive Testing Algorithms}
+The general setup considered in Algorithm X can be specialized to the case of graphical models as in Section X. Let us assume that the knwoledge level of student $\sigma$ is described by a familty of skills $\bm{S}$, while the questions are similarly associated with a set of variables $\bm{Q}$. As a remark, note that we might coarsen the set of possible values $\mathcal{Q}$ each $Q\in \bm{Q}$ (e.g., a multiple choice question with three options might have a single right answer and two other answers that are not distinguishable from the evaluation point of view). Let us define a DAG over $\bm{S}$ and $\bm{Q}$, in particular, we assume each $Q\in\bm{Q}$ to be a leaf child of a subset of $\bm{S}$. This reflects the assumption xxx in the previous section. As a consequence of the irrelevance, we might remove unasked questions xxx.
+
+Regarding the stopping rule, besides the general criteria discussed in the previous section, a typical approach might consist in evaluating the entropy $H(\bm{S}|\bm{e}))$.
+
+
 In the setup of algorithm.
 
 Let us introduce the discussion by means of a simple example modelling the knowledge level of a student in a particular domain. In order to evaluate such level a number of questions can be asked to the student. We describe the knowledge level (or skill) of the student by means of a single variable $S$. We assume $S$ to be a discrete, ordinal, variable, whose $m$ states $\mathcal{S}:=(s^{(0)},\ldots,s^{(m-1)})$ can be intended as increasing knowledge levels in that domain. Regarding the questions, we initially describe them as Boolean variables, whose true state correspond to a correct answer to the question, while no distinctions between the possible wrong answers are considered.\footnote{Dedicated discussion about abstention.} Let $Q$ with $\mathcal{Q}:=(q,\overline{q})$ denote a generic question we ask to the student. A repository of $n$ questions $\bm{Q}$ is assumed to be available. A \emph{testing} algorithm is a procedure deciding which question and how many questions from $\bm{Q}$ should be asked to the student, on the basis of her previous answers. Algorithm X provides an abstract description of xxx.
@@ -586,6 +602,16 @@ Let us introduce the discussion by means of a simple example modelling the knowl
 %		\end{split}
 %	\end{equation}
 	
+    \section{A Toy Example}
+    As a first, demonstrative, example of our ideas consider a model characterized by a single (Boolean) Skill $S$ and a set of questions $\bm{Q}$ picked from a set of templates. Let us first focus on a Bayesian, i.e., precise, case. The prior specification $P(S)$ is achieve by a single parameter $p \in [0,1]$ such that $P(S=1)=p$. For a generic question $Q$, which is also assumed to be Boolean, a complete specification of the CPT $P(Q|S)$ is obtained by the two parameters $p_0,p_1\in [0,1]$ where $P(Q=1|S=0)=p_0$ and $P(Q=1|S=1)=p_1$. In other wrods $p_0$ denote the probability of providing a right answer to the question for a student who does not have the considered skill and $p_1$ for a student who have that skill. An obvious constraint is $p_1>p_0$, i.e., having the skill makes your probability of providing a right answer higher. The inequality should be strict, otherwise the two probabilities are equal, and this means that the answer is irrelevant for the skill. Although parameters $p_1$ and $p_0$ already give a complete parametrization, we perform the linear transformation
+    $\lambda:=1-\frac{1}{2}(p_0+p_1)$ and $\delta=(p_1-p_0)$. The first quantity is the arithmetic average of giving a wrong answer and we might indent it as the \emph{level} of the question, this mining that the higher is $\lambda$ the more unlikely is to receive a correct answer is the students have the same probability of having and not having the skill. Regarding $\delta$ we might intend it as the (average) discriminative power of a question.
+    Note that the inverse relations give $p_1=1-\lambda+\frac{\delta}{2}$
+    and $p_0=1-\lambda-\frac{\delta}{2}$. Where constraint $p_1>p_0$ is just $\delta>0$ and any other value in $[0,1]$ for both parameters is valid.
+    
+    
+    In our toy example, we consider nine possible templates, made of triads of templates with the same $\delta$ and same $\lambda$. The reference values $[0.4,0.5,0.6]$ are used.
+    
+    
 	
 	\section{Introduction}\label{sec:intro}
 	The use of communication and information technologies in education is actually 
@@ -1361,4 +1387,4 @@ overall approach is depicted in Fig.~\ref{fig:alg}.
 	%
 \bibliographystyle{splncs04}
 \bibliography{biblio}
-\end{document}
+\end{document}s
