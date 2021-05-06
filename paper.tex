@@ -88,6 +88,20 @@ Here we present an alternative score based on the mode of the posterior probabil
 \keywords{First keyword  \and Second keyword \and Another keyword.}
 \end{abstract}
 
+
+\section{A Toy Example}
+As a first, demonstrative, example of our ideas consider a model characterized by a single (Boolean) Skill $S$ and a set of questions $\bm{Q}$ picked from a set of templates. Let us first focus on a Bayesian, i.e., precise, case. The prior specification $P(S)$ is achieve by a single parameter $p \in [0,1]$ such that $P(S=1)=p$. For a generic question $Q$, which is also assumed to be Boolean, a complete specification of the CPT $P(Q|S)$ is obtained by the two parameters $p_0,p_1\in [0,1]$ where $P(Q=1|S=0)=p_0$ and $P(Q=1|S=1)=p_1$. In other wrods $p_0$ denote the probability of providing a right answer to the question for a student who does not have the considered skill and $p_1$ for a student who have that skill. An obvious constraint is $p_1>p_0$, i.e., having the skill makes your probability of providing a right answer higher. The inequality should be strict, otherwise the two probabilities are equal, and this means that the answer is irrelevant for the skill. Although parameters $p_1$ and $p_0$ already give a complete parametrization, we perform the linear transformation
+$\lambda:=1-\frac{1}{2}(p_0+p_1)$ and $\delta=(p_1-p_0)$. The first quantity is the arithmetic average of giving a wrong answer and we might indent it as the \emph{level} of the question, this mining that the higher is $\lambda$ the more unlikely is to receive a correct answer is the students have the same probability of having and not having the skill. Regarding $\delta$ we might intend it as the (average) discriminative power of a question.
+Note that the inverse relations give $p_1=1-\lambda+\frac{\delta}{2}$
+and $p_0=1-\lambda-\frac{\delta}{2}$. Where constraint $p_1>p_0$ is just $\delta>0$ and any other value in $[0,1]$ for both parameters is valid.
+
+
+In our toy example, we consider nine possible templates, made of triads of templates with the same $\delta$ and same $\lambda$. The reference values $[0.4,0.5,0.6]$ are used.
+
+
+
+
+
 \section{Testing Algorithms}
 The typical goal of a test or exam is to evaluate the knowledge level of a student or examinee $\sigma$ on the basis of her answers to a number of questions or exercises. Let $\bm{Q}$ denote a repository of questions available to the instructor. The order and the number of questions from $\bm{Q}$ asked to $\sigma$ might not be fixed. We call \emph{testing algorithm} (TA) a procedure taking care of the selection of the sequence of questions asked to the student and able to decide when the test should stop. A standard TA pseudocode is in Algorithm \ref{alg:ta}, where $\bm{e}$ denotes the array of the answers collected from the student $\sigma$.
 
