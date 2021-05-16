@@ -1,28 +1,17 @@
 % This file was created by tikzplotlib v0.9.8.
-\begin{tikzpicture}
-
-\definecolor{color0}{rgb}{0.75,0.75,0}
+\begin{tikzpicture}[scale=0.6]
 
 \begin{axis}[
-legend cell align={left},
-legend style={
-  fill opacity=0.8,
-  draw opacity=1,
-  text opacity=1,
-  at={(0.97,0.03)},
-  anchor=south east,
-  draw=white!80!black
-},
 tick align=outside,
 tick pos=both,
 x grid style={white!69.0196078431373!black},
-xmin=-0.9, xmax=18.9,
+xlabel={Number of questions},
+xmin=-0.9, xmax=20,
 xtick style={color=black},
 y grid style={white!69.0196078431373!black},
+ylabel={Accuracy},
 ymin=-0.049853515625, ymax=1.046923828125,
-ytick style={color=black},
-ytick={-0.2,0,0.2,0.4,0.6,0.8,1,1.2},
-yticklabels={−0.2,0.0,0.2,0.4,0.6,0.8,1.0,1.2}
+ytick style={color=black}
 ]
 \addplot [semithick, red]
 table {%
@@ -46,7 +35,6 @@ table {%
 17 0.9853515625
 18 0.9853515625
 };
-\addlegendentry{c-h}
 \addplot [semithick, blue]
 table {%
 0 0
@@ -69,7 +57,6 @@ table {%
 17 0.982421875
 18 0.982421875
 };
-\addlegendentry{c-m}
 \addplot [semithick, black, dashed]
 table {%
 0 0
@@ -92,7 +79,6 @@ table {%
 17 0.9921875
 18 0.99609375
 };
-\addlegendentry{rand}
 \addplot [semithick, red, dashed]
 table {%
 0 0
@@ -115,7 +101,6 @@ table {%
 17 0.99609375
 18 0.99609375
 };
-\addlegendentry{h}
 \addplot [semithick, blue, dashed]
 table {%
 0 0
@@ -138,30 +123,6 @@ table {%
 17 0.9951171875
 18 0.99609375
 };
-\addlegendentry{m}
-\addplot [semithick, color0, dashed]
-table {%
-0 0
-1 0.671875
-2 0.6904296875
-3 0.75390625
-4 0.7431640625
-5 0.7900390625
-6 0.7890625
-7 0.859375
-8 0.884765625
-9 0.9072265625
-10 0.92578125
-11 0.94140625
-12 0.9580078125
-13 0.97265625
-14 0.9814453125
-15 0.984375
-16 0.986328125
-17 0.98828125
-18 0.99609375
-};
-\addlegendentry{r}
 \end{axis}
 
 \end{tikzpicture}
